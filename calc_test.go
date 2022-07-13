@@ -1,32 +1,48 @@
 package main
 
-import "testing"
-
-var (
-
-	num Calculator = Calculator{2,3}
-
-	hasilPenambahan int = 5
-
-	hasilPengurangan int = -1
-
+import (
+	"os"
+	"testing"
 )
 
+func TestCalculator_Add(t *testing.T) {
+	t.Run("Calculator Add operator testing", func(t *testing.T) {
+		numSample1 := 10
+		numSample2 := 20
 
-func TestCalculator_Add(t *testing.T){
-	t.Logf("Hasil Penjumlahan : %d", num.Add())
 
-	if num.Add() != hasilPenambahan {
-		t.Errorf("Salah! harusnya %d", hasilPenambahan)
-	}
+		calc := Calculator{
+			Num1: numSample1,
+			Num2: numSample2,
+		}
+
+		if calc.Add() != 30 {
+			t.Error("It should return 30")
+		}
+
+	})
 }
 
+func TestCalculator_Sub(t *testing.T) {
+	t.Run("Calculator Sub operator testing", func(t *testing.T) {
+		numSample1 := 3
+		numSample2 := 2
 
-func TestCalcaultor_Sub(t *testing.T){
-	t.Logf("Hasil Pengurangan : %d", num.Sub())
 
-	if num.Sub() != hasilPengurangan {
-		t.Errorf("Salah! harusnya %d", hasilPengurangan)
-	}
+		calc := Calculator{
+			Num1: numSample1,
+			Num2: numSample2,
+		}
 
+		if calc.Sub() != 1 {
+			t.Error("It should return 1")
+		}
+
+	})
 }
+
+func TestMainApp(t *testing.T) {
+	os.Args = []string{"-num1", "2", "-num2", "3", "-opr", "add"}
+	main()
+}
+
